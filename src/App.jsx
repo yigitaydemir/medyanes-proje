@@ -10,25 +10,29 @@ const App = () => {
 
   useEffect(() => {
     const url = capital
-      ? `https://restcountries.com/v3.1/capital/${capital}`
-      : "https://restcountries.com/v3.1/all";
+      ? `https://restcountries.com/v3.1/apital/${capital}`
+      : "https://restcountries.com/v3.1/ll";
 
-    const getCountries = () => {
+    const getCountries = async () => {
       setIsLoading(true);
+      setError(null);
 
       try {
-        fetch(url)
-          .then((data) => data.json())
-          .then((json) => {
-            setCountries(json);
-          });
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setCountries(data);
       } catch (error) {
-        console.log(error.mesage);
-        setError(error.mesage);
+        console.error(error.message);
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
     };
+
+    getCountries();
 
     getCountries();
   }, [capital]);
@@ -60,7 +64,7 @@ const App = () => {
           <h1>Loading...</h1>
         </div>
       ) : error ? (
-        <div>
+        <div style={{ color: "black" }}>
           <h1>There is an error, please try again later...</h1> <br />{" "}
           <p>{error}</p>
         </div>
