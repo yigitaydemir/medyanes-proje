@@ -10,8 +10,8 @@ const App = () => {
 
   useEffect(() => {
     const url = capital
-      ? `https://restcountries.com/v3.1/apital/${capital}`
-      : "https://restcountries.com/v3.1/ll";
+      ? `https://restcountries.com/v3.1/capital/${capital}`
+      : "https://restcountries.com/v3.1/all";
 
     const getCountries = async () => {
       setIsLoading(true);
