@@ -1,16 +1,19 @@
-import { createContext, useState } from 'react'
+import { ThemeContext } from "flowbite-react/lib/esm/components/Flowbite/ThemeContext";
+import { createContext, useState } from "react";
 
-const themeContext = createContext()
+const ThemeContext = createContext();
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <div>
-      <Navbar></Navbar>
-      <Body></Body>
-    </div>
-  )
-}
+    <ThemeContext.Provider>
+      <div>
+        <Navbar></Navbar>
+        <Body></Body>
+      </div>
+    </ThemeContext.Provider>
+  );
+};
 
-export default App
+export default App;
